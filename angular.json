@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "baseHref": "/j-pet-care/",
             "outputPath": {
               "base": "dist/j-pet-care"
             },
