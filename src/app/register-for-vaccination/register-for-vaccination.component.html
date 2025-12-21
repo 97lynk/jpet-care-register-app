@@ -1,0 +1,62 @@
+<!--<div>-->
+<!--  <div class="sticky-panel">-->
+<!--    <mat-button-toggle-group>-->
+<!--      <mat-button-toggle (click)="useLanguage('ja')">🇯🇵Japanese</mat-button-toggle>-->
+<!--      <mat-button-toggle (click)="useLanguage('en')">🇬🇧English</mat-button-toggle>-->
+<!--    </mat-button-toggle-group>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<mat-stepper headerPosition="top" linear #stepper>
+  <mat-step [stepControl]="customerInfoForm">
+    <ng-template matStepLabel>{{ 'customerForm.title' | translate }}</ng-template>
+    <app-customer-info-form [form]="customerInfoForm" (onSubmit)="onSubmitCustomerInfo($event, stepper)"></app-customer-info-form>
+  </mat-step>
+
+  <mat-step [stepControl]="petInfoForms">
+    <ng-template matStepLabel>{{ 'petForm.title' | translate }}</ng-template>
+
+    <form [formGroup]="petInfoForms">
+      <div formArrayName="pets">
+        <div *ngFor="let pet of pets.controls; let i = index" [formGroupName]="i">
+          <div class="pet-step-grid">
+            <!-- LEFT: Pet info -->
+            <div class="left">
+              <app-pet-info-form [form]="pet" [index]="i" (onRemove)="removePet(i)"></app-pet-info-form>
+            </div>
+
+            <!-- RIGHT: Vaccine selection -->
+            <div class="right">
+              <app-vaccine-combo-form [selectedVaccine]="pet.get('comboVaccine')" [size]="pet.get('size')?.value"></app-vaccine-combo-form>
+              <app-vaccine-individual-form [selectedVaccine]="pet.get('individualVaccine')" [size]="pet.get('size')?.value"></app-vaccine-individual-form>
+            </div>
+          </div>
+
+          <mat-divider style="padding: 1rem"></mat-divider>
+
+        </div>
+      </div>
+
+    </form>
+
+    <div class="button-group">
+      <div></div>
+      <div>
+        <button mat-raised-button color="accent" type="button" (click)="addPet()" style="margin-right: 1rem">
+          <mat-icon>add</mat-icon> {{ 'petForm.addPet' | translate }}
+        </button>
+
+        <button mat-raised-button [disabled]="customerInfoForm.invalid || petInfoForms.invalid" color="primary" type="submit" (click)="onSubmitPetInfo(stepper)">
+          <mat-icon>check</mat-icon> {{ 'petForm.submitAll' | translate }}
+        </button>
+      </div>
+      <div>Total: ¥{{ total | number }}</div>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>完了しました</ng-template>
+    <app-register-success/>
+  </mat-step>
+</mat-stepper>

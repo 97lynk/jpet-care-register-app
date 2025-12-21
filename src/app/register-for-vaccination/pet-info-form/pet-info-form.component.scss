@@ -1,0 +1,39 @@
+/* pet-information.component.scss */
+@import "../../style/common.scss";
+
+.section {
+  font-weight: 600;
+  margin: 12px 0 8px;
+  display: block;
+}
+
+.radio-group {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-toggle-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-toggle {
+  width: 100%;
+  div {
+    height: 1.2rem;
+  }
+}
+
+.commitment {
+  margin: 16px 0;
+}
+
+.pet-card {
+  position: relative;
+}

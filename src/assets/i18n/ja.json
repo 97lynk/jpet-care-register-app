@@ -1,0 +1,185 @@
+{
+  "prefecture": {
+    "hokkaido": "北海道",
+    "aomori": "青森県",
+    "iwate": "岩手県",
+    "miyagi": "宮城県",
+    "akita": "秋田県",
+    "yamagata": "山形県",
+    "fukushima": "福島県",
+    "ibaraki": "茨城県",
+    "tochigi": "栃木県",
+    "gunma": "群馬県",
+    "saitama": "埼玉県",
+    "chiba": "千葉県",
+    "tokyo": "東京都",
+    "kanagawa": "神奈川県",
+    "niigata": "新潟県",
+    "toyama": "富山県",
+    "ishikawa": "石川県",
+    "fukui": "福井県",
+    "yamanashi": "山梨県",
+    "nagano": "長野県",
+    "gifu": "岐阜県",
+    "shizuoka": "静岡県",
+    "aichi": "愛知県",
+    "mie": "三重県",
+    "shiga": "滋賀県",
+    "kyoto": "京都府",
+    "osaka": "大阪府",
+    "hyogo": "兵庫県",
+    "nara": "奈良県",
+    "wakayama": "和歌山県",
+    "tottori": "鳥取県",
+    "shimane": "島根県",
+    "okayama": "岡山県",
+    "hiroshima": "広島県",
+    "yamaguchi": "山口県",
+    "tokushima": "徳島県",
+    "kagawa": "香川県",
+    "ehime": "愛媛県",
+    "kochi": "高知県",
+    "fukuoka": "福岡県",
+    "saga": "佐賀県",
+    "nagasaki": "長崎県",
+    "kumamoto": "熊本県",
+    "oita": "大分県",
+    "miyazaki": "宮崎県",
+    "kagoshima": "鹿児島県",
+    "okinawa": "沖縄県"
+  },
+  "customerForm": {
+    "title": "お客様情報の詳細",
+    "fullName": "氏名（フルネーム）",
+    "furigana": "フリガナ ",
+    "postalCode": {
+      "label": "郵便番号 ",
+      "placeholder": "郵便番号（半角数字）000-0000"
+    },
+    "prefecture": "都道府県 ",
+    "city": {
+      "label": "市区町村 ",
+      "placeholder": "例：〇〇市〇〇町"
+    },
+    "address": {
+      "label": "番地 ",
+      "placeholder": "丁目・番地・号"
+    },
+    "building": "建物名 / 部屋番号",
+    "phone": {
+      "label": "電話番号 ",
+      "placeholder": "00-0000-0000"
+    },
+    "email": "メールアドレス ",
+    "submit": "送信"
+  },
+  "petForm": {
+    "title": "ペット情報",
+    "petType": "ペットの種類",
+    "petName": "ペットの名前",
+    "petBreed": "犬種 / 猫種",
+    "birthDate": "生年月日",
+    "gender": "性別",
+    "male": "オス",
+    "female": "メス",
+    "furColor": "毛の色",
+    "weight": "体重 (kg)",
+    "size": "サイズ",
+    "sizeHint": "10kg未満: 小 · 10〜20kg: 中 · 20kg以上: 大",
+    "sizeSmall": "小型",
+    "sizeMedium": "中型",
+    "sizeLarge": "大型",
+    "sizeSmallHint": "10kg未満",
+    "sizeMediumHint": "10〜20kg",
+    "sizeLargeHint": "20kg以上",
+    "healthStatus": "健康状態",
+    "healthy": "健康",
+    "eatingWell": "よく食べる",
+    "digestionGood": "排泄良好",
+    "healthCommitment": "現在ペットは健康です。予防接種の登録をお願いします",
+    "submit": "登録",
+    "addPet": "ペットを追加",
+    "remove": "削除",
+    "submitAll": "全てのペットを登録"
+  },
+  "locations": {
+    "veterinary_clinics": "動物病院",
+    "supermarkets": "スーパー＆ホームセンター",
+    "petshops": "ペットショップ",
+    "sakura_clinic": "さくら動物病院",
+    "tokyo_pet": "東京ペットクリニック",
+    "valor_gifu": "バロー岐阜店",
+    "cainz_tokyo": "カインズ東京店",
+    "petplus_shibuya": "ペットプラス渋谷"
+  },
+  "timeslots": {
+    "fullday_10_15": "終日 10:00–15:00",
+    "valor_morning": "午前 10:00–12:30",
+    "valor_afternoon": "午後 14:30–17:00",
+    "petshop_morning": "午前 10:00–12:00",
+    "petshop_afternoon": "午後 13:00–15:00"
+  },
+  "appointmentDetailFrom": {
+    "title": "予約情報",
+    "location": {
+      "label": "場所",
+      "required": "Location is required"
+    },
+    "timeSlot": {
+      "label": "時間帯"
+    },
+    "date": {
+      "label": "日付",
+      "required": "Date is required"
+    }
+  },
+  "vaccineComboForm": {
+    "name": "セットメニュー",
+    "size": "サイズ",
+    "sizeSmall": "小型",
+    "sizeMedium": "中型",
+    "sizeLarge": "大型",
+    "price": "価格(税込)",
+    "setA": {
+      "name": "Aセット",
+      "content": "狂犬病予防接種\n混合ワクチン接種(犬7種混合)\nフィラリア症予防薬12回分(おやつタイプ)\n寄生虫病の予防3本(滴下タイプ)"
+    },
+    "setB": {
+      "name": "Bセット",
+      "content": "混合ワクチン接種(犬7種混合)\nフィラリア症予防薬12回分(おやつタイプ)\n寄生虫病の予防3本(滴下タイプ)"
+    },
+    "setC": {
+      "name": "Cセット",
+      "content": "狂犬病予防接種\nフィラリア症予防薬12回分(おやつタイプ)\n寄生虫病の予防3本(滴下タイプ)"
+    },
+    "setD": {
+      "name": "Dセット",
+      "content": "狂犬病予防接種\n混合ワクチン接種(犬7種混合)"
+    }
+  },
+  "vaccineIndividualForm": {
+    "name": "単体メニュー",
+    "size": "サイズ",
+    "sizeSmall": "小型",
+    "sizeMedium": "中型",
+    "sizeLarge": "大型",
+    "sizeAll": "全サイズ共通",
+    "price": "価格(税込)",
+    "rabiesShot": {
+      "name": "狂犬病予防接種",
+      "content": "単品"
+    },
+    "mixed": {
+      "name": "混合ワクチン",
+      "content": "犬7種混合"
+    },
+    "heartwormMed": {
+      "name": "フィラリア薬",
+      "content": "おやつタイプ(1回分)"
+    },
+    "parasitePrev": {
+      "name": "ノミ・ダニ予防",
+      "content": "スポットタイプ(1回分)"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.pet-step-grid {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr; // left / right
+  gap: 16px;
+  align-items: start; // IMPORTANT
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .pet-step-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.sticky-panel {
+  background: #f8f8f5;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mat-horizontal-stepper-header-container {
+  position: sticky;
+  z-index: 1;
+  background: white;
+  top: 0;
+}
+

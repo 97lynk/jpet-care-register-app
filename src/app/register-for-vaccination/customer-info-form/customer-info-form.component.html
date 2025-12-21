@@ -1,0 +1,69 @@
+<mat-card class="container">
+  <mat-card-title>{{ 'customerForm.title' | translate }}</mat-card-title>
+
+  <form [formGroup]="form" autocomplete="off">
+
+    <mat-form-field floatLabel="always" class="full">
+      <mat-label>{{ 'customerForm.fullName' | translate }}</mat-label>
+      <input matInput formControlName="fullName">
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.furigana' | translate }}</mat-label>
+      <input matInput formControlName="furigana">
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.postalCode.label' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'customerForm.postalCode.placeholder' | translate }}"
+             pattern="[0-9]{3}-?[0-9]{4}" formControlName="postalCode"
+             (input)="onPostalCodeChange()"
+      >
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.prefecture' | translate }}</mat-label>
+      <mat-select formControlName="prefecture">
+        <mat-option *ngFor="let p of prefectureOptions" [value]="p.value">
+          {{ p.label | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.city.label' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'customerForm.city.placeholder' | translate }}" formControlName="city">
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.address.label' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'customerForm.address.placeholder' | translate }}" formControlName="address">
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.building' | translate }}</mat-label>
+      <input matInput formControlName="building">
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.phone.label' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'customerForm.phone.placeholder' | translate }}" formControlName="phone">
+    </mat-form-field>
+
+    <mat-form-field class="full">
+      <mat-label>{{ 'customerForm.email' | translate }}</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <app-appointment-details [form]="form.get('appointment')" />
+
+    <!-- SUBMIT -->
+    <button mat-raised-button color="primary"
+            class="submit"
+            (click)="submit()"
+            [disabled]="form.invalid">
+      {{ 'customerForm.submit' | translate }}
+    </button>
+
+  </form>
+</mat-card>

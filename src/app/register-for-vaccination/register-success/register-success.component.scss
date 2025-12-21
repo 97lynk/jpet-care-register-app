@@ -1,0 +1,38 @@
+.success-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fa;
+  padding: 16px;
+}
+
+.success-card {
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-width: 360px;
+  width: 100%;
+}
+
+.code {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+.info {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.message {
+  margin-top: 16px;
+  font-size: 15px;
+  color: #2e7d32;
+  font-weight: 600;
+}
+¬

@@ -1,0 +1,26 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.full {
+  width: 100%;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+h-100 {
+  height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 0;
+    box-shadow: none;
+  }
+}

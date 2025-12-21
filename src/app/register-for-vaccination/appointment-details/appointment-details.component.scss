@@ -1,0 +1,23 @@
+@import "../../style/common.scss";
+
+.appointment-panel {
+  background-color: #f8f8f5;
+  border: 1px solid var(--border-color);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.time-slot-radio {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  mat-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    mat-radio-button {
+      margin: 4px 8px 4px 0;
+      min-width: 80px; // adjust size as needed
+    }
+  }
+}
