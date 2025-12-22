@@ -1,0 +1,185 @@
+{
+  "prefecture": {
+    "hokkaido": "Hokkaido",
+    "aomori": "Aomori",
+    "iwate": "Iwate",
+    "miyagi": "Miyagi",
+    "akita": "Akita",
+    "yamagata": "Yamagata",
+    "fukushima": "Fukushima",
+    "ibaraki": "Ibaraki",
+    "tochigi": "Tochigi",
+    "gunma": "Gunma",
+    "saitama": "Saitama",
+    "chiba": "Chiba",
+    "tokyo": "Tokyo",
+    "kanagawa": "Kanagawa",
+    "niigata": "Niigata",
+    "toyama": "Toyama",
+    "ishikawa": "Ishikawa",
+    "fukui": "Fukui",
+    "yamanashi": "Yamanashi",
+    "nagano": "Nagano",
+    "gifu": "Gifu",
+    "shizuoka": "Shizuoka",
+    "aichi": "Aichi",
+    "mie": "Mie",
+    "shiga": "Shiga",
+    "kyoto": "Kyoto",
+    "osaka": "Osaka",
+    "hyogo": "Hyogo",
+    "nara": "Nara",
+    "wakayama": "Wakayama",
+    "tottori": "Tottori",
+    "shimane": "Shimane",
+    "okayama": "Okayama",
+    "hiroshima": "Hiroshima",
+    "yamaguchi": "Yamaguchi",
+    "tokushima": "Tokushima",
+    "kagawa": "Kagawa",
+    "ehime": "Ehime",
+    "kochi": "Kochi",
+    "fukuoka": "Fukuoka",
+    "saga": "Saga",
+    "nagasaki": "Nagasaki",
+    "kumamoto": "Kumamoto",
+    "oita": "Oita",
+    "miyazaki": "Miyazaki",
+    "kagoshima": "Kagoshima",
+    "okinawa": "Okinawa"
+  },
+  "customerForm": {
+    "title": "Customer Information Details",
+    "fullName": "Full Name",
+    "furigana": "Furigana",
+    "postalCode": {
+      "label": "Postal Code",
+      "placeholder": "Format 000-0000"
+    },
+    "prefecture": "Prefecture",
+    "city": {
+      "label": "Municipality",
+      "placeholder": "City, Ward, Town"
+    },
+    "address": {
+      "label": "Address Line",
+      "placeholder": "Chome, Banchi, Go"
+    },
+    "building": "Building / Room Number",
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "00-0000-0000"
+    },
+    "email": "Email Address",
+    "submit": "Submit"
+  },
+  "petForm": {
+    "title": "Pet Information",
+    "petType": "Pet Type",
+    "petName": "Pet Name",
+    "petBreed": "Breed",
+    "birthDate": "Date of Birth",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "furColor": "Fur Color",
+    "weight": "Weight (kg)",
+    "size": "Size",
+    "sizeHint": "Under 10kg: Small · 10–20kg: Medium · Over 20kg: Large",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "sizeSmallHint": "Under 10kg",
+    "sizeMediumHint": "10 – 20kg",
+    "sizeLargeHint": "Over 20kg",
+    "healthStatus": "Health Status",
+    "healthy": "Healthy",
+    "eatingWell": "Eating Well",
+    "digestionGood": "Good Digestion",
+    "healthCommitment": "My pet is currently healthy, request vaccination registration",
+    "submit": "Register",
+    "addPet": "Add Another Pet",
+    "remove": "Remove",
+    "submitAll": "Submit All Pets"
+  },
+  "locations": {
+    "veterinary_clinics": "Veterinary Clinics",
+    "supermarkets": "Supermarkets & Home Centers",
+    "petshops": "Pet Shops",
+    "sakura_clinic": "Sakura Animal Clinic",
+    "tokyo_pet": "Tokyo Pet Clinic",
+    "valor_gifu": "Valor Gifu",
+    "cainz_tokyo": "Cainz Tokyo",
+    "petplus_shibuya": "Pet Plus Shibuya"
+  },
+  "timeslots": {
+    "fullday_10_15": "Full Day 10:00–15:00",
+    "valor_morning": "Morning 10:00–12:30",
+    "valor_afternoon": "Afternoon 14:30–17:00",
+    "petshop_morning": "Morning 10:00–12:00",
+    "petshop_afternoon": "Afternoon 13:00–15:00"
+  },
+  "appointmentDetailFrom": {
+    "title": "Appointment Details",
+    "location": {
+      "label": "Location",
+      "required": "Location is required"
+    },
+    "timeSlot": {
+      "label": "Time Slot"
+    },
+    "date": {
+      "label": "Date",
+      "required": "Date is required"
+    }
+  },
+  "vaccineComboForm": {
+    "name": "Sets",
+    "size": "Size",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "price": "Price incl. tax",
+    "setA": {
+      "name": "Set A",
+      "content": "Heartworm (12 mo)\nParasite + Rabies\n7-way Vaccine"
+    },
+    "setB": {
+      "name": "Set B",
+      "content": "Heartworm (12 mo)\nParasite\n7-way Vaccine"
+    },
+    "setC": {
+      "name": "Set C",
+      "content": "Rabies\n7-way Vaccine\nParasite"
+    },
+    "setD": {
+      "name": "Set D",
+      "content": "Rabies\n7-way Vaccine"
+    }
+  },
+  "vaccineIndividualForm": {
+    "name": "Individuals",
+    "size": "Size",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "sizeAll": "All size",
+    "price": "Price incl. tax",
+    "rabiesShot": {
+      "name": "Rabies Shot",
+      "content": "Vaccination only"
+    },
+    "mixed": {
+      "name": "Mixed Vaccine",
+      "content": "7-way combination"
+    },
+    "heartwormMed": {
+      "name": "Heartworm Med",
+      "content": "Single dose (Snack type)"
+    },
+    "parasitePrev": {
+      "name": "Parasite Prev.",
+      "content": "Single topical treatment"
+    }
+  }
+}
