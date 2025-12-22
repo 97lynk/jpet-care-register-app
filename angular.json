@@ -21,9 +21,7 @@
           "builder": "@angular/build:application",
           "options": {
             "baseHref": "/j-pet-care/",
-            "outputPath": {
-              "base": "dist/j-pet-care"
-            },
+            "outputPath":"dist/j-pet-care",
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
