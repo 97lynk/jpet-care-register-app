@@ -1,46 +1,23 @@
-name: Deploy Angular to GitHub Pages
-
+name: Build and Deploy
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
+    branches:
+      - main
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v3
+    - name: All things angular
+      uses: AhsanAyaz/angular-deploy-gh-pages-actions@1.4.0
+      with:
+        github_access_token: ${{ secrets.GH_TOKEN }}
+        build_configuration: production
+        base_href: /j-pet-care/
+        deploy_branch: gh-pages
+        angular_dist_build_folder: dist/j-pet-care
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.21.1
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Angular
-        run: npm run build -- --base-href=/${{ github.event.repository.name }}/
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/j-pet-care
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+permissions:
+  contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
