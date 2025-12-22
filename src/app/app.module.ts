@@ -76,7 +76,7 @@ import {RegisterSuccessComponent} from "./register-for-vaccination/register-succ
       lang: 'ja',
       fallbackLang: 'ja',
       loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/',
+        prefix: './assets/i18n/',
         suffix: '.json'
       })
     }),
