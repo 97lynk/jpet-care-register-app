@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RegisterForVaccinationComponent} from "./register-for-vaccination/register-for-vaccination.component";
+import {RegisterForVaccinationComponent} from "./components/register-for-vaccination/register-for-vaccination.component";
 
 const routes: Routes = [
   {

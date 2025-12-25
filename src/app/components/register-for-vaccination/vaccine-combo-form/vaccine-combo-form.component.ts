@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {COMBO_PRICE_DATA} from "../../constants/price.data";
+import {COMBO_PRICE_DATA} from "../../../constants/price.data";
 
 @Component({
     selector: 'app-vaccine-combo-form',
@@ -9,12 +9,13 @@ import {COMBO_PRICE_DATA} from "../../constants/price.data";
 })
 export class VaccineComboFormComponent implements OnInit {
 
+  @Input() product!: any[];
+
   @Input() selectedVaccine!: any; // <-- Use parent form
 
   @Input() petSize : any;
 
   displayedColumns = ['name', 'content', 'size', 'price', 'select'];
-  dataSource = COMBO_PRICE_DATA;
 
   constructor() { }
 

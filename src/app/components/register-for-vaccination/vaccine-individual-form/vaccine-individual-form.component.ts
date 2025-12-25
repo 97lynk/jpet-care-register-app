@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {INDIVIDUAL_PRICE_DATA} from "../../constants/price.data";
 
 @Component({
   selector: 'app-vaccine-individual-form',
@@ -9,13 +8,13 @@ import {INDIVIDUAL_PRICE_DATA} from "../../constants/price.data";
 })
 export class VaccineIndividualFormComponent implements OnInit {
 
+  @Input() product!: any[];
   @Input() selectedVaccine!: any; // <-- Use parent form
   @Input() amountVaccine!: any; // <-- Use parent form
 
   @Input() petSize: any;
 
   displayedColumns = ['name', 'content', 'size', 'price', 'select', 'amount'];
-  dataSource = INDIVIDUAL_PRICE_DATA;
 
   ngOnInit(): void {
     this.petSize.valueChanges.subscribe((value: any) => {

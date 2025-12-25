@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import moment from "moment";
-import {INDIVIDUAL_PRICE_DATA, INDIVIDUAL_PRICE_KEY} from "../constants/price.data";
+import {COMBO_PRICE_DATA, INDIVIDUAL_PRICE_DATA, INDIVIDUAL_PRICE_KEY} from "../../constants/price.data";
 
 
 @Component({
@@ -46,7 +46,7 @@ export class RegisterForVaccinationComponent implements OnInit {
     this.pets.valueChanges.subscribe(value => {
       console.log('changes pets form ', value);
       this.recalculateTotal();
-    })
+    });
 
   }
 
@@ -131,4 +131,8 @@ export class RegisterForVaccinationComponent implements OnInit {
 
     return total;
   }
+
+  protected readonly COMBO_PRICE_DATA = COMBO_PRICE_DATA;
+  protected readonly INDIVIDUAL_PRICE_KEY = INDIVIDUAL_PRICE_KEY;
+  protected readonly INDIVIDUAL_PRICE_DATA = INDIVIDUAL_PRICE_DATA;
 }

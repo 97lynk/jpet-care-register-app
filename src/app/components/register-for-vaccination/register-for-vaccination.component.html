@@ -29,9 +29,11 @@
             <!-- RIGHT: Vaccine selection -->
             <div class="right">
               <app-vaccine-combo-form
+                [product]="COMBO_PRICE_DATA"
                 [selectedVaccine]="pet.get('comboVaccine')"
                 [petSize]="pet.get('size')"/>
               <app-vaccine-individual-form
+                [product]="INDIVIDUAL_PRICE_DATA"
                 [selectedVaccine]="pet.get('individualVaccineSelection')"
                 [amountVaccine]="pet.get('individualVaccineAmount')"
                 [petSize]="pet.get('size')"/>

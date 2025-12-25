@@ -25,18 +25,18 @@ import {MatDividerModule} from "@angular/material/divider";
 import {QRCodeComponent} from "angularx-qrcode";
 
 import {AppRoutingModule} from "./app-routing.module";
-import {AppComponent} from "./app.component";
+import {AppComponent} from "./components/app.component";
 import {
   AppointmentDetailsComponent
-} from "./register-for-vaccination/appointment-details/appointment-details.component";
-import {RegisterSuccessComponent} from "./register-for-vaccination/register-success/register-success.component";
-import {CustomerInfoFormComponent} from './register-for-vaccination/customer-info-form/customer-info-form.component';
-import {PetInfoFormComponent} from './register-for-vaccination/pet-info-form/pet-info-form.component';
-import {VaccineComboFormComponent} from './register-for-vaccination/vaccine-combo-form/vaccine-combo-form.component';
+} from "./components/register-for-vaccination/appointment-details/appointment-details.component";
+import {RegisterSuccessComponent} from "./components/register-for-vaccination/register-success/register-success.component";
+import {CustomerInfoFormComponent} from './components/register-for-vaccination/customer-info-form/customer-info-form.component';
+import {PetInfoFormComponent} from './components/register-for-vaccination/pet-info-form/pet-info-form.component';
+import {VaccineComboFormComponent} from './components/register-for-vaccination/vaccine-combo-form/vaccine-combo-form.component';
 import {
   VaccineIndividualFormComponent
-} from "./register-for-vaccination/vaccine-individual-form/vaccine-individual-form.component";
-import {RegisterForVaccinationComponent} from './register-for-vaccination/register-for-vaccination.component';
+} from "./components/register-for-vaccination/vaccine-individual-form/vaccine-individual-form.component";
+import {RegisterForVaccinationComponent} from './components/register-for-vaccination/register-for-vaccination.component';
 
 @NgModule({
   declarations: [

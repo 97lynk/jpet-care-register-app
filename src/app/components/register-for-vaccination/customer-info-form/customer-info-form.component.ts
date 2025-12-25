@@ -1,8 +1,8 @@
 // customer-form.component.ts
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {UntypedFormBuilder} from '@angular/forms';
-import {PostalCodeService} from "../../services/postal-code.service";
-import {PREFECTURE_OPTIONS} from "../../constants/prefectures";
+import {PostalCodeService} from "../../../services/postal-code.service";
+import {PREFECTURE_OPTIONS} from "../../../constants/prefectures";
 
 @Component({
   selector: 'app-customer-info-form',
