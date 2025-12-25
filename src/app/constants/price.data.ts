@@ -249,3 +249,9 @@ export const INDIVIDUAL_PRICE_DATA: any[] = [
     }
   }
 ];
+
+export const INDIVIDUAL_PRICE_KEY = INDIVIDUAL_PRICE_DATA.reduce((acc, item) => {
+  const key = `${item.value.code}_${item.value.size}`;
+  acc[key] = item.value.price;
+  return acc;
+}, {});

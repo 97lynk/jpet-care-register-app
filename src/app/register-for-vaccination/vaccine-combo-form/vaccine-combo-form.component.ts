@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {COMBO_PRICE_DATA} from "../../constants/price.data";
-import {PREFECTURE_OPTIONS} from "../../constants/prefectures";
 
 @Component({
     selector: 'app-vaccine-combo-form',
@@ -12,7 +11,7 @@ export class VaccineComboFormComponent implements OnInit {
 
   @Input() selectedVaccine!: any; // <-- Use parent form
 
-  @Input() size = 'small';
+  @Input() petSize : any;
 
   displayedColumns = ['name', 'content', 'size', 'price', 'select'];
   dataSource = COMBO_PRICE_DATA;
@@ -20,7 +19,14 @@ export class VaccineComboFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.petSize.valueChanges.subscribe((value: any) => {
+      this.selectedVaccine.setValue(null);
+    });
   }
 
-  protected readonly prefectureOptions = PREFECTURE_OPTIONS;
+  onSelectVaccine(value: any) {
+    if (value == this.selectedVaccine.value) {
+      this.selectedVaccine.setValue(null);
+    }
+  }
 }

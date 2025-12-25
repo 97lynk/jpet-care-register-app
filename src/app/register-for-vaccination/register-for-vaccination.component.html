@@ -1,11 +1,11 @@
-<!--<div>-->
-<!--  <div class="sticky-panel">-->
-<!--    <mat-button-toggle-group>-->
-<!--      <mat-button-toggle (click)="useLanguage('ja')">🇯🇵Japanese</mat-button-toggle>-->
-<!--      <mat-button-toggle (click)="useLanguage('en')">🇬🇧English</mat-button-toggle>-->
-<!--    </mat-button-toggle-group>-->
-<!--  </div>-->
-<!--</div>-->
+<div>
+  <div class="sticky-panel">
+    <mat-button-toggle-group>
+      <mat-button-toggle checked (click)="useLanguage('ja')">🇯🇵 Japanese</mat-button-toggle>
+      <mat-button-toggle (click)="useLanguage('en')">🇬🇧 English</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
 
 
 <mat-stepper headerPosition="top" linear #stepper>
@@ -23,13 +23,18 @@
           <div class="pet-step-grid">
             <!-- LEFT: Pet info -->
             <div class="left">
-              <app-pet-info-form [form]="pet" [index]="i" (onRemove)="removePet(i)"></app-pet-info-form>
+              <app-pet-info-form [form]="pet" [index]="i" (onRemove)="removePet(i)" />
             </div>
 
             <!-- RIGHT: Vaccine selection -->
             <div class="right">
-              <app-vaccine-combo-form [selectedVaccine]="pet.get('comboVaccine')" [size]="pet.get('size')?.value"></app-vaccine-combo-form>
-              <app-vaccine-individual-form [selectedVaccine]="pet.get('individualVaccine')" [size]="pet.get('size')?.value"></app-vaccine-individual-form>
+              <app-vaccine-combo-form
+                [selectedVaccine]="pet.get('comboVaccine')"
+                [petSize]="pet.get('size')"/>
+              <app-vaccine-individual-form
+                [selectedVaccine]="pet.get('individualVaccineSelection')"
+                [amountVaccine]="pet.get('individualVaccineAmount')"
+                [petSize]="pet.get('size')"/>
             </div>
           </div>
 

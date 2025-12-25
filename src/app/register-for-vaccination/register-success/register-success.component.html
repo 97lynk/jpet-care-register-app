@@ -1,23 +1,30 @@
 <div class="success-wrapper">
-  <div class="success-card mat-elevation-z3">
+  <mat-card class="success-card mat-elevation-z3">
 
-    <qrcode
-      [qrdata]="'HCM_123'"
-      [width]="180">
-    </qrcode>
-
-    <div class="code">
+    <!-- CODE -->
+    <mat-card-title class="code">
       Code: <b>HCM_123</b>
+    </mat-card-title>
+
+    <!-- QR CODE -->
+    <div class="qr">
+      <qrcode
+        [qrdata]="'HCM_123'"
+        [width]="180">
+      </qrcode>
     </div>
 
-    <div class="info">
+
+    <!-- INFO -->
+    <mat-card-content class="info">
       <div><b>Location:</b> HCM</div>
       <div><b>Date & Time:</b> 12-03-2025 12:00</div>
-    </div>
+    </mat-card-content>
 
-    <div class="message">
+    <!-- MESSAGE -->
+    <mat-card-footer class="message">
       Your vaccine appointment was registered successfully!
-    </div>
+    </mat-card-footer>
 
-  </div>
+  </mat-card>
 </div>

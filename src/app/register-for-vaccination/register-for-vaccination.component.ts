@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import moment from "moment";
-import {COMBO_PRICE_DATA, INDIVIDUAL_PRICE_DATA} from "../constants/price.data";
+import {INDIVIDUAL_PRICE_DATA, INDIVIDUAL_PRICE_KEY} from "../constants/price.data";
 
 
 @Component({
@@ -17,14 +17,14 @@ export class RegisterForVaccinationComponent implements OnInit {
 
   customerInfoForm = this.fb.group({
     fullName: ['', Validators.required],
-    furigana: ['12', Validators.required],
-    postalCode: ['100-0004', [Validators.required, Validators.pattern(/^\d{3}-\d{4}$/)]],
-    prefecture: ['Tokyo', Validators.required],
-    city: ['A', Validators.required],
-    address: ['A', Validators.required],
-    building: ['A'],
-    phone: ['019', Validators.required],
-    email: ['A@gamil.com', [Validators.required, Validators.email]],
+    furigana: ['', Validators.required],
+    postalCode: ['', [Validators.required, Validators.pattern(/^\d{3}-\d{4}$/)]],
+    prefecture: ['', Validators.required],
+    city: ['', Validators.required],
+    address: ['', Validators.required],
+    building: [''],
+    phone: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     appointment: this.fb.group({
       location: [null, Validators.required],
       timeSlot: [{value: null, disabled: true}, Validators.required],
@@ -44,7 +44,7 @@ export class RegisterForVaccinationComponent implements OnInit {
 
   ngOnInit(): void {
     this.pets.valueChanges.subscribe(value => {
-      console.log('changes', value);
+      console.log('changes pets form ', value);
       this.recalculateTotal();
     })
 
@@ -61,6 +61,14 @@ export class RegisterForVaccinationComponent implements OnInit {
   }
 
   createPetGroup(): FormGroup {
+    const keys = Object.keys(INDIVIDUAL_PRICE_KEY);
+    const selectVaccineControls = Object.fromEntries(
+      keys.map(key => [key, [{value: false, disabled: true}]])
+    );
+    const amountVaccineControls = Object.fromEntries(
+      keys.map(key => [key, [{value: 0, disabled: true}, Validators.min(1)]])
+    );
+
     return this.fb.group({
       petName: ['', Validators.required],
       petBreed: ['', Validators.required],
@@ -68,15 +76,16 @@ export class RegisterForVaccinationComponent implements OnInit {
       gender: ['male', Validators.required],
       furColor: ['', Validators.required],
       weight: ['', Validators.required],
-      size: ['small', Validators.required],
+      size: ['', Validators.required],
       healthStatus: this.fb.group({
         healthy: [false],
         eatingWell: [false],
         digestionGood: [false]
       }),
       healthCommitment: [true, Validators.requiredTrue],
-      comboVaccine: [COMBO_PRICE_DATA[0].value],
-      individualVaccine: [INDIVIDUAL_PRICE_DATA[0].value],
+      comboVaccine: [null],
+      individualVaccineSelection: this.fb.group(selectVaccineControls),
+      individualVaccineAmount: this.fb.group(amountVaccineControls),
     });
   }
 
@@ -106,8 +115,20 @@ export class RegisterForVaccinationComponent implements OnInit {
     let total = 0;
     let pets = this.petInfoForms.getRawValue().pets;
     for (let i = 0; i < pets.length; i++) {
-      total += (pets[i].comboVaccine?.price || 0) + (pets[i].individualVaccine?.price || 0);
+      total += (pets[i].comboVaccine?.price || 0) +
+        this.getIndividualVaccinesPrice(pets[i].individualVaccineSelection, pets[i].individualVaccineAmount);
     }
     this.total = total;
+  }
+
+  getIndividualVaccinesPrice(individualVaccineSelection: any, individualVaccineAmount: any) {
+    let total = 0;
+    Object.keys(individualVaccineSelection)
+      .filter((key) => individualVaccineSelection[key])
+      .forEach((key: any) => {
+        total += INDIVIDUAL_PRICE_KEY[key] * individualVaccineAmount[key];
+      })
+
+    return total;
   }
 }

@@ -1,76 +1,95 @@
 <div class="desktop-view">
-  <mat-radio-group [formControl]="selectedVaccine">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 container">
 
-      <!-- Individual name -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef colspan="2" style="text-align: center">
-          <b>{{ 'vaccineIndividualForm.name' | translate }}</b>
-        </th>
-        <td [hidden]="row.rowspan.name === 0" [attr.rowspan]="row.rowspan.name" mat-cell *matCellDef="let row">
-          <b>{{ row.name | translate }}</b>
-        </td>
-      </ng-container>
+    <!-- Individual name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef colspan="2" style="text-align: center">
+        <b>{{ 'vaccineIndividualForm.name' | translate }}</b>
+      </th>
+      <td [hidden]="row.rowspan.name === 0" [attr.rowspan]="row.rowspan.name" mat-cell *matCellDef="let row">
+        <b>{{ row.name | translate }}</b>
+      </td>
+    </ng-container>
 
-      <!-- Service -->
-      <ng-container matColumnDef="content">
-        <th mat-header-cell *matHeaderCellDef [hidden]="true"></th>
-        <td mat-cell [hidden]="row.rowspan.content === 0" [attr.rowspan]="row.rowspan.content" *matCellDef="let row">
-          <pre> {{ row.content | translate }}</pre>
-        </td>
-      </ng-container>
+    <!-- Service -->
+    <ng-container matColumnDef="content">
+      <th mat-header-cell *matHeaderCellDef [hidden]="true"></th>
+      <td mat-cell [hidden]="row.rowspan.content === 0" [attr.rowspan]="row.rowspan.content" *matCellDef="let row">
+        <pre> {{ row.content | translate }}</pre>
+      </td>
+    </ng-container>
 
-      <!-- Size -->
-      <ng-container matColumnDef="size">
-        <th mat-header-cell *matHeaderCellDef>
-          <b>{{ 'vaccineIndividualForm.size' | translate }}</b>
-        </th>
-        <td mat-cell *matCellDef="let row"
-            [class.disable-cell]="row.value?.size !== 'all' && size !== row.value?.size">
-          {{ row.size | translate }}
-        </td>
-      </ng-container>
+    <!-- Size -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>
+        <b>{{ 'vaccineIndividualForm.size' | translate }}</b>
+      </th>
+      <td mat-cell *matCellDef="let row"
+          [class.disable-cell]="row.value?.size !== 'all' && petSize.value !== row.value?.size">
+        {{ row.size | translate }}
+      </td>
+    </ng-container>
 
-      <!-- Price -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>
-          <b>{{ 'vaccineIndividualForm.price' | translate }}</b>
-        </th>
-        <td mat-cell *matCellDef="let row"
-            [class.disable-cell]="row.value?.size !== 'all' && size !== row.value?.size">
-          ¥{{ row.price | number }}
-        </td>
-      </ng-container>
+    <!-- Price -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>
+        <b>{{ 'vaccineIndividualForm.price' | translate }}</b>
+      </th>
+      <td mat-cell *matCellDef="let row"
+          [class.disable-cell]="row.value?.size !== 'all' && petSize.value !== row.value?.size">
+        ¥{{ row.price | number }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let row">
-          <mat-radio-button [value]="row.value" [disabled]="row.value?.size !== 'all' && size !== row.value?.size"/>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox [formControl]="selectedVaccine.get(`${row.value.code}_${row.value.size}`)"
+                      (change)="onSelectVaccine(`${row.value.code}_${row.value.size}`)"
+                      [value]="row.value"/>
+      </td>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </mat-radio-group>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-form-field style="margin-top: 1rem">
+          <input matInput [formControl]="amountVaccine.get(`${row.value.code}_${row.value.size}`)" type="number"/>
+          @if (amountVaccine.get(`${row.value.code}_${row.value.size}`).hasError('min')) {
+            <mat-error>The minimum amount is 1.</mat-error>
+          }
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
 
 <mat-card class="container mobile-view">
   <mat-card-title>{{ 'vaccineIndividualForm.name' | translate }}</mat-card-title>
-  <mat-radio-group [formControl]="selectedVaccine">
-    @for (row of dataSource; track row) {
-      <div class="name-vaccine">
-        @if (row.rowspan.name !== 0) {
-          <mat-divider style="margin-bottom: 1rem"/>
-          <div><b>{{ row.name | translate }}</b></div>
-          <pre>{{ row.content | translate }}</pre>
-        }
-        <div>
-          <mat-radio-button [value]="row.value" [disabled]="row.value?.size !== 'all' && size !== row.value?.size">{{ row.size | translate }} -
-            ¥{{ row.price | number }}
-          </mat-radio-button>
-        </div>
+  @for (row of dataSource; track row) {
+    <div class="name-vaccine">
+      @if (row.rowspan.name !== 0) {
+        <mat-divider style="margin-bottom: 1rem"/>
+        <div><b>{{ row.name | translate }}</b></div>
+        <pre>{{ row.content | translate }}</pre>
+      }
+      <div>
+        <mat-checkbox [formControl]="selectedVaccine.get(`${row.value.code}_${row.value.size}`)"
+                      (change)="onSelectVaccine(`${row.value.code}_${row.value.size}`)"
+                      [value]="row.value">
+                      {{ row.size | translate }} - ¥{{ row.price | number }}
+        </mat-checkbox>
+        <mat-form-field style="margin-top: 1rem">
+          <input matInput [formControl]="amountVaccine.get(`${row.value.code}_${row.value.size}`)" type="number"/>
+          @if (amountVaccine.get(`${row.value.code}_${row.value.size}`).hasError('min')) {
+            <mat-error>The minimum amount is 1.</mat-error>
+          }
+        </mat-form-field>
       </div>
-    }
-  </mat-radio-group>
+    </div>
+  }
 </mat-card>

@@ -44,7 +44,7 @@ export class PetInfoFormComponent implements OnInit {
     } else if (weight > 20) {
       sizeValue = 'large';
     }
-    this.form.patchValue({ size: sizeValue }, { emitEvent: false });
+    this.form.patchValue({ size: sizeValue }, { emitEvent: true });
   }
 
   submit() {
@@ -53,7 +53,7 @@ export class PetInfoFormComponent implements OnInit {
     }
   }
 
-  onSizeChange(size: any) {
+  onPetSizeChange(size: any) {
     if (!this.form || !size) return;
 
     console.log('onSizeChange', size);
