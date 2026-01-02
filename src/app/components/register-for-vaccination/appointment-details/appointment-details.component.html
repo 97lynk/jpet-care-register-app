@@ -8,7 +8,7 @@
         formControlName="prefecture"
         (selectionChange)="onPrefectureChange($event.value)"
       >
-        <mat-option *ngFor="let pref of prefectures" [value]="pref.id">
+        <mat-option *ngFor="let pref of prefectures" [value]="pref.code">
           {{ pref.name | translate }}
         </mat-option>
       </mat-select>
@@ -40,7 +40,7 @@
       <mat-radio-group formControlName="timeSlot">
         <mat-radio-button class="full"
                           *ngFor="let slot of currentTimeSlots"
-                          [value]="slot.id">
+                          [value]="slot.code">
           {{ slot.label | translate }}
         </mat-radio-button>
       </mat-radio-group>
