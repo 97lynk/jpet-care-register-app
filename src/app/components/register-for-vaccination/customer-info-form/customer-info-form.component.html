@@ -1,7 +1,7 @@
-<mat-card class="container">
+<mat-card class="container" *ngIf="form">
   <mat-card-title>{{ 'customerForm.title' | translate }}</mat-card-title>
 
-  <form [formGroup]="form" autocomplete="off">
+  <form [formGroup]="customerForm" autocomplete="off">
 
     <mat-form-field floatLabel="always" class="full">
       <mat-label>{{ 'customerForm.fullName' | translate }}</mat-label>
@@ -55,7 +55,7 @@
       <input matInput formControlName="email">
     </mat-form-field>
 
-    <app-appointment-details [form]="form.get('appointment')" />
+    <app-appointment-details [form]="customerForm.get('appointment')" />
 
     <!-- SUBMIT -->
     <button mat-raised-button color="primary"

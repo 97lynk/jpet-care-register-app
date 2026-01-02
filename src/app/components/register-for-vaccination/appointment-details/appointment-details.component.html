@@ -1,7 +1,7 @@
-<mat-card class="container appointment-panel">
+<mat-card class="container appointment-panel" *ngIf="form">
   <mat-card-title>{{ 'appointmentDetailFrom.title' | translate }}</mat-card-title>
 
-  <form [formGroup]="form">
+  <form [formGroup]="appointmentForm">
     <mat-form-field appearance="outline" class="full">
       <mat-label>{{ 'appointmentDetailFrom.prefecture.label' | translate }}</mat-label>
       <mat-select
@@ -12,12 +12,12 @@
           {{ pref.name | translate }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('prefecture')?.invalid">
+      <mat-error *ngIf="appointmentForm.get('prefecture')?.invalid">
         {{ 'appointmentDetailFrom.prefecture.required' | translate }}
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full" *ngIf="form.get('prefecture')?.value">
+    <mat-form-field appearance="outline" class="full" *ngIf="appointmentForm.get('prefecture')?.value">
       <mat-label>{{ 'appointmentDetailFrom.location.label' | translate }}</mat-label>
       <mat-select
         formControlName="location"
@@ -27,14 +27,14 @@
           {{ item.name }} - {{ item.address }} ({{ item.phone }})
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('location')?.invalid">
+      <mat-error *ngIf="appointmentForm.get('location')?.invalid">
         {{ 'appointmentDetailFrom.location.required' | translate }}
       </mat-error>
     </mat-form-field>
 
 
     <!-- Time Slot as Radio Buttons -->
-    <div class="full time-slot-radio" *ngIf="form.get('location')?.value">
+    <div class="full time-slot-radio" *ngIf="appointmentForm.get('location')?.value">
       <mat-label>{{ 'appointmentDetailFrom.timeSlot.label' | translate }}</mat-label>
 
       <mat-radio-group formControlName="timeSlot">
@@ -46,7 +46,7 @@
       </mat-radio-group>
     </div>
 
-    <mat-form-field appearance="outline" class="full" *ngIf="form.get('location')?.value">
+    <mat-form-field appearance="outline" class="full" *ngIf="appointmentForm.get('location')?.value">
       <mat-label>{{ 'appointmentDetailFrom.date.label' | translate }}</mat-label>
       <input
         matInput
@@ -56,7 +56,7 @@
       >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="form.get('appointmentDate')?.invalid">
+      <mat-error *ngIf="appointmentForm.get('appointmentDate')?.invalid">
         {{ 'appointmentDetailFrom.date.required' | translate }}
       </mat-error>
     </mat-form-field>

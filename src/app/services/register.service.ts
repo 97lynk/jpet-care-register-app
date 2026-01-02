@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {ProductVaccine} from "../models/product-vaccine.model";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +9,7 @@ export class RegisterService {
 
   private readonly API = 'http://localhost:8765/public/vaccines/register';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   register(request: any): Observable<any> {
     console.log('public/vaccines/register', request);

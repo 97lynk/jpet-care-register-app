@@ -1,5 +1,5 @@
-<div class="desktop-view">
-  <table mat-table [dataSource]="product" class="mat-elevation-z1 container">
+<div class="desktop-view" *ngIf="selectedVaccine && amountVaccine && petSize">
+  <table mat-table [dataSource]="products" class="mat-elevation-z1 container">
 
     <!-- Individual name -->
     <ng-container matColumnDef="name">
@@ -26,7 +26,7 @@
       </th>
       <td mat-cell *matCellDef="let row"
           [class.disable-cell]="row.petSize !== 'ALL' && petSize.value !== row.petSize">
-        {{ row.petSize }}
+        {{ row.petSize | translate }}
       </td>
     </ng-container>
 
@@ -44,21 +44,20 @@
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-        <mat-checkbox [formControl]="selectedVaccine.get(`${row.productCode}_${row.petSize}`)"
-                      (change)="onSelectVaccine(`${row.productCode}_${row.petSize}`)"
-                      [value]="row.value"/>
+        <mat-checkbox *ngIf="getSelectionControl(row.productId)"
+                      [formControl]="getSelectionControl(row.productId)!"
+                      (change)="onSelectVaccine(row.productId)"/>
       </td>
-
     </ng-container>
 
     <ng-container matColumnDef="amount">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-        <mat-form-field style="margin-top: 1rem">
-          <input matInput [formControl]="amountVaccine.get(`${row.productCode}_${row.petSize}`)" type="number"/>
-          @if (amountVaccine.get(`${row.productCode}_${row.petSize}`).hasError('min')) {
-            <mat-error>The minimum amount is 1.</mat-error>
-          }
+        <mat-form-field style="margin-top: 1rem" *ngIf="getAmountControl(row.productId)">
+          <input matInput [formControl]="getAmountControl(row.productId)!" type="number"/>
+          <mat-error *ngIf="getAmountControl(row.productId)?.hasError('min')">
+            The minimum amount is 1.
+          </mat-error>
         </mat-form-field>
       </td>
     </ng-container>
@@ -67,29 +66,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
-
-<!--<mat-card class="container mobile-view">-->
-<!--  <mat-card-title>{{ 'vaccineIndividualForm.name' | translate }}</mat-card-title>-->
-<!--  @for (row of product; track row) {-->
-<!--    <div class="name-vaccine">-->
-<!--      @if (row.rowspan.name !== 0) {-->
-<!--        <mat-divider style="margin-bottom: 1rem"/>-->
-<!--        <div><b>{{ row.name | translate }}</b></div>-->
-<!--        <pre>{{ row.content | translate }}</pre>-->
-<!--      }-->
-<!--      <div>-->
-<!--        <mat-checkbox [formControl]="selectedVaccine.get(`${row.productCode}_${row.petSize}`)"-->
-<!--                      (change)="onSelectVaccine(`${row.productCode}_${row.petSize}`)"-->
-<!--                      [value]="row.value">-->
-<!--                      {{ row.size | translate }} - ¥{{ row.price | number }}-->
-<!--        </mat-checkbox>-->
-<!--        <mat-form-field style="margin-top: 1rem">-->
-<!--          <input matInput [formControl]="amountVaccine.get(`${row.productCode}_${row.petSize}`)" type="number"/>-->
-<!--          @if (amountVaccine.get(`${row.productCode}_${row.petSize}`).hasError('min')) {-->
-<!--            <mat-error>The minimum amount is 1.</mat-error>-->
-<!--          }-->
-<!--        </mat-form-field>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  }-->
-<!--</mat-card>-->

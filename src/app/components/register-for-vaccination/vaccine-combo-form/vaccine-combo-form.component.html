@@ -1,6 +1,6 @@
 <div class="desktop-view">
-  <mat-radio-group [formControl]="selectedVaccine">
-    <table mat-table [dataSource]="product" class="mat-elevation-z1  container">
+  <mat-radio-group [formControl]="selectedVaccineControl">
+    <table mat-table [dataSource]="products" class="mat-elevation-z1  container">
 
       <!-- Combo name -->
       <ng-container matColumnDef="name">
@@ -25,7 +25,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <b>{{ 'vaccineComboForm.size' | translate }}</b>
         </th>
-        <td mat-cell *matCellDef="let row" [class.disable-cell]="petSize.value !== row.petSize">
+        <td mat-cell *matCellDef="let row" [class.disable-cell]="petSize?.value !== row.petSize">
           {{ row.petSize | translate }}
         </td>
       </ng-container>
@@ -35,7 +35,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <b>{{ 'vaccineComboForm.price' | translate }}</b>
         </th>
-        <td mat-cell *matCellDef="let row" [class.disable-cell]="petSize.value !== row.petSize">
+        <td mat-cell *matCellDef="let row" [class.disable-cell]="petSize?.value !== row.petSize">
           ¥{{ row.price | number }}
         </td>
       </ng-container>
@@ -43,8 +43,8 @@
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
-          <mat-radio-button (click)="onSelectVaccine(row.value)" [value]="row.value"
-                            [disabled]="petSize.value !== row.petSize"/>
+          <mat-radio-button (click)="onSelectVaccine(row)" [value]="row"
+                            [disabled]="petSize?.value !== row.petSize"/>
         </td>
       </ng-container>
 

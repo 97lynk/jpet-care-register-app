@@ -1,33 +1,54 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ProductVaccine} from "../../../models/product-vaccine.model";
+import {DisplayProductDto} from '../../../models/product/product.dto';
+import {AbstractControl, FormControl, ReactiveFormsModule} from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+import {CommonModule} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-vaccine-combo-form',
-    templateUrl: './vaccine-combo-form.component.html',
-    styleUrls: ['./vaccine-combo-form.component.scss'],
-    standalone: false
+  selector: 'app-vaccine-combo-form',
+  templateUrl: './vaccine-combo-form.component.html',
+  styleUrls: ['./vaccine-combo-form.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatTableModule,
+    TranslateModule
+  ]
 })
 export class VaccineComboFormComponent implements OnInit {
 
-  @Input() product!: ProductVaccine[];
-
-  @Input() selectedVaccine!: any; // <-- Use parent form
-
-  @Input() petSize : any;
+  @Input() products!: DisplayProductDto[];
+  @Input() selectedVaccine!: AbstractControl | null;
+  @Input() petSize!: AbstractControl | null;
 
   displayedColumns = ['name', 'content', 'size', 'price', 'select'];
 
   constructor() { }
 
   ngOnInit(): void {
-    this.petSize.valueChanges.subscribe((value: any) => {
-      this.selectedVaccine.setValue(null);
-    });
+    if (this.petSize) {
+      this.petSize.valueChanges.subscribe(() => {
+        this.selectedVaccine?.setValue(null);
+      });
+    }
   }
 
-  onSelectVaccine(value: any) {
-    if (value == this.selectedVaccine.value) {
-      this.selectedVaccine.setValue(null);
+  // Getter to safely cast for the template
+  get selectedVaccineControl(): FormControl {
+    return this.selectedVaccine as FormControl;
+  }
+
+  onSelectVaccine(value: any): void {
+    if (this.selectedVaccine) {
+      if (value === this.selectedVaccine.value) {
+        this.selectedVaccine.setValue(null);
+      } else {
+        this.selectedVaccine.setValue(value);
+      }
     }
   }
 }
