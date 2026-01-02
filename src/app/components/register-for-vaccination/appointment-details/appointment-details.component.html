@@ -2,18 +2,30 @@
   <mat-card-title>{{ 'appointmentDetailFrom.title' | translate }}</mat-card-title>
 
   <form [formGroup]="form">
-    <!-- Location -->
     <mat-form-field appearance="outline" class="full">
+      <mat-label>{{ 'appointmentDetailFrom.prefecture.label' | translate }}</mat-label>
+      <mat-select
+        formControlName="prefecture"
+        (selectionChange)="onPrefectureChange($event.value)"
+      >
+        <mat-option *ngFor="let pref of prefectures" [value]="pref.id">
+          {{ pref.name | translate }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('prefecture')?.invalid">
+        {{ 'appointmentDetailFrom.prefecture.required' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full" *ngIf="form.get('prefecture')?.value">
       <mat-label>{{ 'appointmentDetailFrom.location.label' | translate }}</mat-label>
       <mat-select
         formControlName="location"
         (selectionChange)="onLocationChange($event.value)"
       >
-        <mat-optgroup *ngFor="let group of locations" [label]="group.group | translate">
-          <mat-option *ngFor="let item of group.items" [value]="item.value">
-            {{ item.label | translate }}
-          </mat-option>
-        </mat-optgroup>
+        <mat-option *ngFor="let item of filteredLocations" [value]="item.id">
+          {{ item.name }} - {{ item.address }} ({{ item.phone }})
+        </mat-option>
       </mat-select>
       <mat-error *ngIf="form.get('location')?.invalid">
         {{ 'appointmentDetailFrom.location.required' | translate }}
@@ -22,21 +34,19 @@
 
 
     <!-- Time Slot as Radio Buttons -->
-    <div class="full time-slot-radio">
+    <div class="full time-slot-radio" *ngIf="form.get('location')?.value">
       <mat-label>{{ 'appointmentDetailFrom.timeSlot.label' | translate }}</mat-label>
 
       <mat-radio-group formControlName="timeSlot">
         <mat-radio-button class="full"
                           *ngFor="let slot of currentTimeSlots"
-                          [value]="slot.value"
-        >
+                          [value]="slot.id">
           {{ slot.label | translate }}
         </mat-radio-button>
       </mat-radio-group>
     </div>
 
-    <!-- Date -->
-    <mat-form-field appearance="outline" class="full">
+    <mat-form-field appearance="outline" class="full" *ngIf="form.get('location')?.value">
       <mat-label>{{ 'appointmentDetailFrom.date.label' | translate }}</mat-label>
       <input
         matInput

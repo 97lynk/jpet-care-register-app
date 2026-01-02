@@ -57,7 +57,7 @@
       "placeholder": "Format 000-0000"
     },
     "prefecture": "Prefecture",
-    "city": {
+    "municipality": {
       "label": "Municipality",
       "placeholder": "City, Ward, Town"
     },
@@ -121,6 +121,10 @@
   },
   "appointmentDetailFrom": {
     "title": "Appointment Details",
+    "prefecture": {
+      "label": "Prefecture",
+      "required": "Prefecture is required"
+    },
     "location": {
       "label": "Location",
       "required": "Location is required"

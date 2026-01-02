@@ -21,6 +21,8 @@ export class CustomerInfoFormComponent implements OnInit {
   statusMessage = '';
   statusType: 'success' | 'error' | '' = '';
 
+  pattern = '[0-9]{3}[-]{0,1}[0-9]{4}';
+
   constructor(private fb: UntypedFormBuilder,
               private postalCodeService: PostalCodeService
   ) {
@@ -30,6 +32,7 @@ export class CustomerInfoFormComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.form.error);
     if (this.form.valid) {
       console.log(this.form.value);
       this.onSubmit.emit(this.form.value);

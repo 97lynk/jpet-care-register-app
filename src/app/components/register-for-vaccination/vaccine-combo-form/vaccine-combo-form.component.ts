@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {COMBO_PRICE_DATA} from "../../../constants/price.data";
+import {ProductVaccine} from "../../../models/product-vaccine.model";
 
 @Component({
     selector: 'app-vaccine-combo-form',
@@ -9,7 +9,7 @@ import {COMBO_PRICE_DATA} from "../../../constants/price.data";
 })
 export class VaccineComboFormComponent implements OnInit {
 
-  @Input() product!: any[];
+  @Input() product!: ProductVaccine[];
 
   @Input() selectedVaccine!: any; // <-- Use parent form
 

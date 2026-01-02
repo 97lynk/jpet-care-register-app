@@ -24,7 +24,7 @@ export class PetInfoFormComponent implements OnInit {
         gender: ['', Validators.required],
         furColor: ['', Validators.required],
         weight: [1, Validators.required],
-        size: ['small', Validators.required],
+        size: ['SMALL', Validators.required],
         healthStatus: this.fb.group({
           healthy: [false],
           eatingWell: [false],
@@ -38,11 +38,11 @@ export class PetInfoFormComponent implements OnInit {
   onWeightChange(weight: number) {
     if (!this.form) return;
 
-    let sizeValue = 'small';
+    let sizeValue = 'SMALL';
     if (weight >= 10 && weight <= 20) {
-      sizeValue = 'medium';
+      sizeValue = 'MEDIUM';
     } else if (weight > 20) {
-      sizeValue = 'large';
+      sizeValue = 'LARGE';
     }
     this.form.patchValue({ size: sizeValue }, { emitEvent: true });
   }

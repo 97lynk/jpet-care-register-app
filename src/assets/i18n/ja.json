@@ -56,8 +56,8 @@
       "label": "郵便番号 ",
       "placeholder": "郵便番号（半角数字）000-0000"
     },
-    "prefecture": "都道府県 ",
-    "city": {
+    "prefecture": "都道府県",
+    "municipality": {
       "label": "市区町村 ",
       "placeholder": "例：〇〇市〇〇町"
     },
@@ -121,6 +121,10 @@
   },
   "appointmentDetailFrom": {
     "title": "予約情報",
+    "prefecture": {
+      "label": "都道府県",
+      "required": "Prefecture is required"
+    },
     "location": {
       "label": "場所",
       "required": "Location is required"

@@ -19,31 +19,13 @@ export class VaccineIndividualFormComponent implements OnInit {
   ngOnInit(): void {
     this.petSize.valueChanges.subscribe((value: any) => {
       console.log('Pet size changed2:', value);
-      this.selectedVaccine.patchValue({
-        RABIES_SHOT_all: false,
-        MIXED_all: false,
-        HEARTWORM_MED_small: false,
-        HEARTWORM_MED_medium: false,
-        HEARTWORM_MED_large: false,
-        PARASITE_PREV_small: false,
-        PARASITE_PREV_medium: false,
-        PARASITE_PREV_large: false
+      Object.values(this.amountVaccine.controls).forEach((control: any) => {
+        control.setValue(0);
+        control.disable();
       });
-
-      this.amountVaccine.patchValue({
-        RABIES_SHOT_all: 0,
-        MIXED_all: 0,
-        HEARTWORM_MED_small: 0,
-        HEARTWORM_MED_medium: 0,
-        HEARTWORM_MED_large: 0,
-        PARASITE_PREV_small: 0,
-        PARASITE_PREV_medium: 0,
-        PARASITE_PREV_large: 0
-      });
-
-      Object.values(this.amountVaccine.controls).forEach((control: any) => control.disable());
       Object.keys(this.selectedVaccine.controls).forEach((controlName: string) => {
-        if (controlName.includes('_all') || controlName.includes(value)) {
+        this.selectedVaccine.get(controlName).setValue(false);
+        if (controlName.includes('_ALL') || controlName.includes(value)) {
           this.selectedVaccine.controls[controlName].enable();
         } else {
           this.selectedVaccine.controls[controlName].disable();

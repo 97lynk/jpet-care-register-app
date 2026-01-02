@@ -63,15 +63,15 @@
     <!-- SIZE -->
     <label class="section">{{ 'petForm.size' | translate }}</label>
     <mat-button-toggle-group formControlName="size" class="full button-toggle-group" (valueChange)="onPetSizeChange($event)">
-      <mat-button-toggle class="button-toggle" [value]="'small'">
+      <mat-button-toggle class="button-toggle" [value]="'SMALL'">
         <div>{{ 'petForm.sizeSmall' | translate }}</div>
         <small>({{ 'petForm.sizeSmallHint' | translate }})</small>
       </mat-button-toggle>
-      <mat-button-toggle class="button-toggle" [value]="'medium'">
+      <mat-button-toggle class="button-toggle" [value]="'MEDIUM'">
         <div>{{ 'petForm.sizeMedium' | translate }}</div>
         <small>({{ 'petForm.sizeMediumHint' | translate }})</small>
       </mat-button-toggle>
-      <mat-button-toggle class="button-toggle" [value]="'large'">
+      <mat-button-toggle class="button-toggle" [value]="'LARGE'">
         <div>{{ 'petForm.sizeLarge' | translate }}</div>
         <small>({{ 'petForm.sizeLargeHint' | translate }})</small>
       </mat-button-toggle>
