@@ -61,5 +61,9 @@
       </mat-error>
     </mat-form-field>
 
+    <div class="summary-label" *ngIf="appointmentForm.valid && selectedPrefecture && selectedLocation && selectedTimeSlot">
+      {{ selectedPrefecture.name | translate }} - {{ selectedLocation.name }} - {{ appointmentForm.get('appointmentDate')?.value | date: 'mediumDate' }} - {{ selectedTimeSlot.label | translate }}
+    </div>
+
   </form>
 </mat-card>

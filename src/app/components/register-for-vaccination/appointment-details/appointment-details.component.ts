@@ -78,4 +78,19 @@ export class AppointmentDetailsComponent implements OnInit {
       }
     }
   }
+
+  get selectedPrefecture(): AppointmentPrefecture | undefined {
+    const code = this.appointmentForm.get('prefecture')?.value;
+    return this.prefectures.find(p => p.code === code);
+  }
+
+  get selectedLocation(): AppointmentLocation | undefined {
+    const id = this.appointmentForm.get('location')?.value;
+    return this.filteredLocations.find(l => l.id === id);
+  }
+
+  get selectedTimeSlot(): AppointmentTimeSlot | undefined {
+    const code = this.appointmentForm.get('timeSlot')?.value;
+    return this.currentTimeSlots.find(t => t.code === code);
+  }
 }
