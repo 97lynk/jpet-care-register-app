@@ -1,80 +1,40 @@
-// app.module.ts OR a shared material.module.ts
-import {NgModule, provideBrowserGlobalErrorListeners, provideZoneChangeDetection} from '@angular/core';
+import {NgModule, provideZoneChangeDetection} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
-import {BrowserModule} from "@angular/platform-browser";
-import {provideTranslateService, TranslateModule} from "@ngx-translate/core";
-import {provideHttpClient} from "@angular/common/http";
-import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
+import {BrowserModule} from '@angular/platform-browser';
+import {provideTranslateService, TranslateModule} from '@ngx-translate/core';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
-import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatRadioModule} from "@angular/material/radio";
-import {MatGridListModule} from "@angular/material/grid-list";
-import {MatTableModule} from "@angular/material/table";
-import {MatStepperModule} from "@angular/material/stepper";
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from "@angular/material/divider";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 
-import {QRCodeComponent} from "angularx-qrcode";
+import {QRCodeComponent} from 'angularx-qrcode';
 
-import {AppRoutingModule} from "./app-routing.module";
-import {AppComponent} from "./components/app.component";
-import {
-  AppointmentDetailsComponent
-} from "./components/register-for-vaccination/appointment-details/appointment-details.component";
-import {RegisterSuccessComponent} from "./components/register-for-vaccination/register-success/register-success.component";
-import {CustomerInfoFormComponent} from './components/register-for-vaccination/customer-info-form/customer-info-form.component';
-import {PetInfoFormComponent} from './components/register-for-vaccination/pet-info-form/pet-info-form.component';
-import {VaccineComboFormComponent} from './components/register-for-vaccination/vaccine-combo-form/vaccine-combo-form.component';
-import {
-  VaccineIndividualFormComponent
-} from "./components/register-for-vaccination/vaccine-individual-form/vaccine-individual-form.component";
-import {RegisterForVaccinationComponent} from './components/register-for-vaccination/register-for-vaccination.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './components/app.component';
+
+import {environment} from '../environments/environment';
+import {mockHttpInterceptor} from './services/mock-http-interceptor';
 
 @NgModule({
   declarations: [
-    CustomerInfoFormComponent,
-    PetInfoFormComponent,
-    VaccineComboFormComponent,
-    RegisterForVaccinationComponent,
-    AppointmentDetailsComponent,
-    VaccineIndividualFormComponent,
-    RegisterSuccessComponent,
-    AppComponent,
+    AppComponent, // Only AppComponent remains declared here
   ],
   bootstrap: [AppComponent],
-  imports: [ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatRadioModule,
-    MatButtonToggleModule,
-    MatDividerModule,
-    MatNativeDateModule,
-    MatGridListModule,
-    MatStepperModule,
-    MatIconModule,
-    MatTableModule,
-
+  imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    TranslateModule.forRoot(), QRCodeComponent,
+    TranslateModule.forRoot(),
+    QRCodeComponent,
+    MatNativeDateModule, // Keep providers for global config
   ],
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({eventCoalescing: true}),
-    provideHttpClient(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    // Conditionally provide the mock interceptor using the modern `withInterceptors`
+    provideHttpClient(
+      withInterceptors(environment.useMock ? [mockHttpInterceptor] : [])
+    ),
     provideTranslateService({
       lang: 'ja',
       fallbackLang: 'ja',
@@ -85,7 +45,7 @@ import {RegisterForVaccinationComponent} from './components/register-for-vaccina
     }),
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: {floatLabel: 'always', appearance: 'outline'}
+      useValue: { floatLabel: 'always', appearance: 'outline' }
     },
     {
       provide: MAT_DATE_LOCALE,

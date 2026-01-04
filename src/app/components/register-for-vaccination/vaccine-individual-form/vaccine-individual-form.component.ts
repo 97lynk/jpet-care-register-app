@@ -1,62 +1,80 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, ReactiveFormsModule} from '@angular/forms';
+import {DisplayProductDto} from '../../../models/product/product.dto';
+import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {CommonModule} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vaccine-individual-form',
   templateUrl: './vaccine-individual-form.component.html',
-  styleUrl: './vaccine-individual-form.component.scss',
-  standalone: false
+  styleUrls: ['./vaccine-individual-form.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TranslateModule
+  ]
 })
 export class VaccineIndividualFormComponent implements OnInit {
 
-  @Input() product!: any[];
-  @Input() selectedVaccine!: any; // <-- Use parent form
-  @Input() amountVaccine!: any; // <-- Use parent form
-
-  @Input() petSize: any;
+  @Input() products!: DisplayProductDto[];
+  @Input() selectedVaccine!: AbstractControl | null;
+  @Input() amountVaccine!: AbstractControl | null;
+  @Input() petSize!: AbstractControl | null;
 
   displayedColumns = ['name', 'content', 'size', 'price', 'select', 'amount'];
 
   ngOnInit(): void {
-    this.petSize.valueChanges.subscribe((value: any) => {
-      console.log('Pet size changed2:', value);
-      this.selectedVaccine.patchValue({
-        RABIES_SHOT_all: false,
-        MIXED_all: false,
-        HEARTWORM_MED_small: false,
-        HEARTWORM_MED_medium: false,
-        HEARTWORM_MED_large: false,
-        PARASITE_PREV_small: false,
-        PARASITE_PREV_medium: false,
-        PARASITE_PREV_large: false
-      });
+    if (this.petSize) {
+      this.petSize.valueChanges.subscribe((size: string) => {
+        this.amountVaccine?.reset({}, { emitEvent: false });
+        this.selectedVaccine?.reset({}, { emitEvent: false });
 
-      this.amountVaccine.patchValue({
-        RABIES_SHOT_all: 0,
-        MIXED_all: 0,
-        HEARTWORM_MED_small: 0,
-        HEARTWORM_MED_medium: 0,
-        HEARTWORM_MED_large: 0,
-        PARASITE_PREV_small: 0,
-        PARASITE_PREV_medium: 0,
-        PARASITE_PREV_large: 0
-      });
+        this.products?.forEach(product => {
+          const selectionControl = this.getSelectionControl(product.productId);
+          const amountControl = this.getAmountControl(product.productId);
 
-      Object.values(this.amountVaccine.controls).forEach((control: any) => control.disable());
-      Object.keys(this.selectedVaccine.controls).forEach((controlName: string) => {
-        if (controlName.includes('_all') || controlName.includes(value)) {
-          this.selectedVaccine.controls[controlName].enable();
-        } else {
-          this.selectedVaccine.controls[controlName].disable();
-        }
+          if (selectionControl && amountControl) {
+            amountControl.disable();
+            if (product.petSize === 'ALL' || product.petSize === size) {
+              selectionControl.enable();
+            } else {
+              selectionControl.disable();
+            }
+          }
+        });
       });
-    });
+    }
   }
 
-  onSelectVaccine(keyName: string) {
-    if (this.selectedVaccine.get(keyName)?.value) {
-      this.amountVaccine.get(keyName)?.enable();
+  onSelectVaccine(productId: number): void {
+    const amountControl = this.getAmountControl(productId);
+    const selectionControl = this.getSelectionControl(productId);
+
+    if (selectionControl?.value) {
+      amountControl?.enable();
+      if (amountControl?.value < 1) {
+        amountControl?.setValue(1);
+      }
     } else {
-      this.amountVaccine.get(keyName)?.disable();
+      amountControl?.setValue(0);
+      amountControl?.disable();
     }
+  }
+
+  getSelectionControl(productId: number): FormControl | null {
+    return this.selectedVaccine?.get(String(productId)) as FormControl | null;
+  }
+
+  getAmountControl(productId: number): FormControl | null {
+    return this.amountVaccine?.get(String(productId)) as FormControl | null;
   }
 }

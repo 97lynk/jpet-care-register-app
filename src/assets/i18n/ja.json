@@ -56,8 +56,8 @@
       "label": "郵便番号 ",
       "placeholder": "郵便番号（半角数字）000-0000"
     },
-    "prefecture": "都道府県 ",
-    "city": {
+    "prefecture": "都道府県",
+    "municipality": {
       "label": "市区町村 ",
       "placeholder": "例：〇〇市〇〇町"
     },
@@ -76,6 +76,8 @@
   "petForm": {
     "title": "ペット情報",
     "petType": "ペットの種類",
+    "dog": "犬",
+    "cat": "猫",
     "petName": "ペットの名前",
     "petBreed": "犬種 / 猫種",
     "birthDate": "生年月日",
@@ -102,25 +104,12 @@
     "remove": "削除",
     "submitAll": "全てのペットを登録"
   },
-  "locations": {
-    "veterinary_clinics": "動物病院",
-    "supermarkets": "スーパー＆ホームセンター",
-    "petshops": "ペットショップ",
-    "sakura_clinic": "さくら動物病院",
-    "tokyo_pet": "東京ペットクリニック",
-    "valor_gifu": "バロー岐阜店",
-    "cainz_tokyo": "カインズ東京店",
-    "petplus_shibuya": "ペットプラス渋谷"
-  },
-  "timeslots": {
-    "fullday_10_15": "終日 10:00–15:00",
-    "valor_morning": "午前 10:00–12:30",
-    "valor_afternoon": "午後 14:30–17:00",
-    "petshop_morning": "午前 10:00–12:00",
-    "petshop_afternoon": "午後 13:00–15:00"
-  },
   "appointmentDetailFrom": {
     "title": "予約情報",
+    "prefecture": {
+      "label": "都道府県",
+      "required": "Prefecture is required"
+    },
     "location": {
       "label": "場所",
       "required": "Location is required"
@@ -135,51 +124,23 @@
   },
   "vaccineComboForm": {
     "name": "セットメニュー",
-    "size": "サイズ",
-    "sizeSmall": "小型",
-    "sizeMedium": "中型",
-    "sizeLarge": "大型",
+    "sizeLabel": "サイズ",
     "price": "価格(税込)",
-    "setA": {
-      "name": "Aセット",
-      "content": "狂犬病予防接種\n混合ワクチン接種(犬7種混合)\nフィラリア症予防薬12回分(おやつタイプ)\n寄生虫病の予防3本(滴下タイプ)"
-    },
-    "setB": {
-      "name": "Bセット",
-      "content": "混合ワクチン接種(犬7種混合)\nフィラリア症予防薬12回分(おやつタイプ)\n寄生虫病の予防3本(滴下タイプ)"
-    },
-    "setC": {
-      "name": "Cセット",
-      "content": "狂犬病予防接種\nフィラリア症予防薬12回分(おやつタイプ)\n寄生虫病の予防3本(滴下タイプ)"
-    },
-    "setD": {
-      "name": "Dセット",
-      "content": "狂犬病予防接種\n混合ワクチン接種(犬7種混合)"
+    "size": {
+      "SMALL": "小型",
+      "MEDIUM": "中型",
+      "LARGE": "大型"
     }
   },
   "vaccineIndividualForm": {
     "name": "単体メニュー",
-    "size": "サイズ",
-    "sizeSmall": "小型",
-    "sizeMedium": "中型",
-    "sizeLarge": "大型",
-    "sizeAll": "全サイズ共通",
+    "sizeLabel": "サイズ",
     "price": "価格(税込)",
-    "rabiesShot": {
-      "name": "狂犬病予防接種",
-      "content": "単品"
-    },
-    "mixed": {
-      "name": "混合ワクチン",
-      "content": "犬7種混合"
-    },
-    "heartwormMed": {
-      "name": "フィラリア薬",
-      "content": "おやつタイプ(1回分)"
-    },
-    "parasitePrev": {
-      "name": "ノミ・ダニ予防",
-      "content": "スポットタイプ(1回分)"
+    "size": {
+      "SMALL": "小型",
+      "MEDIUM": "中型",
+      "LARGE": "大型",
+      "ALL": "全サイズ共通"
     }
   }
 }

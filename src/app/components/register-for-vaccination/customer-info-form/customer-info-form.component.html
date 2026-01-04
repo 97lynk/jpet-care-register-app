@@ -1,7 +1,7 @@
-<mat-card class="container">
+<mat-card class="container" *ngIf="form">
   <mat-card-title>{{ 'customerForm.title' | translate }}</mat-card-title>
 
-  <form [formGroup]="form" autocomplete="off">
+  <form [formGroup]="customerForm" autocomplete="off">
 
     <mat-form-field floatLabel="always" class="full">
       <mat-label>{{ 'customerForm.fullName' | translate }}</mat-label>
@@ -16,7 +16,7 @@
     <mat-form-field class="full">
       <mat-label>{{ 'customerForm.postalCode.label' | translate }}</mat-label>
       <input matInput placeholder="{{ 'customerForm.postalCode.placeholder' | translate }}"
-             pattern="[0-9]{3}-?[0-9]{4}" formControlName="postalCode"
+             formControlName="postalCode"
              (input)="onPostalCodeChange()"
       >
     </mat-form-field>
@@ -31,8 +31,8 @@
     </mat-form-field>
 
     <mat-form-field class="full">
-      <mat-label>{{ 'customerForm.city.label' | translate }}</mat-label>
-      <input matInput placeholder="{{ 'customerForm.city.placeholder' | translate }}" formControlName="city">
+      <mat-label>{{ 'customerForm.municipality.label' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'customerForm.municipality.placeholder' | translate }}" formControlName="municipality">
     </mat-form-field>
 
     <mat-form-field class="full">
@@ -55,7 +55,7 @@
       <input matInput formControlName="email">
     </mat-form-field>
 
-    <app-appointment-details [form]="form.get('appointment')" />
+    <app-appointment-details [form]="customerForm.get('appointment')" />
 
     <!-- SUBMIT -->
     <button mat-raised-button color="primary"

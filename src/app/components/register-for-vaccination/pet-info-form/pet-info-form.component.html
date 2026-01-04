@@ -1,27 +1,33 @@
-<mat-card class="container pet-card">
+<mat-card class="container pet-card" *ngIf="form">
   <mat-card-title>
     <div style="display: flex; justify-content: space-between">
       <div>{{ 'petForm.title' | translate }} {{ index + 1 }}</div>
       <!-- REMOVE BUTTON -->
-      @if (index > 0) {
-        <button
-          mat-icon-button
-          color="warn"
-          type="button"
-          (click)="onClickRemove()">
-          <mat-icon>close</mat-icon>
-        </button>
-      }
+      <button
+        *ngIf="index > 0"
+        mat-icon-button
+        color="warn"
+        type="button"
+        (click)="onClickRemove()">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </mat-card-title>
 
-  <form [formGroup]="form">
+  <form [formGroup]="petForm">
 
     <!-- NAME -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>{{ 'petForm.petName' | translate }}</mat-label>
       <input matInput formControlName="petName">
     </mat-form-field>
+
+    <!-- PET TYPE -->
+    <label class="section">{{ 'petForm.petType' | translate }}</label>
+    <mat-radio-group formControlName="petType" class="radio-group">
+      <mat-radio-button value="DOG">{{ 'petForm.dog' | translate }}</mat-radio-button>
+      <mat-radio-button value="CAT">{{ 'petForm.cat' | translate }}</mat-radio-button>
+    </mat-radio-group>
 
     <!-- BREED -->
     <mat-form-field appearance="outline" class="full">
@@ -50,7 +56,7 @@
     <!-- WEIGHT -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>{{ 'petForm.weight' | translate }}</mat-label>
-      <input matInput type="number" formControlName="weight" (input)="onWeightChange(form.value.weight!)">
+      <input matInput type="number" formControlName="weight" (input)="onWeightChange(petForm.value.weight!)">
     </mat-form-field>
 
     <!-- GENDER -->
@@ -63,15 +69,15 @@
     <!-- SIZE -->
     <label class="section">{{ 'petForm.size' | translate }}</label>
     <mat-button-toggle-group formControlName="size" class="full button-toggle-group" (valueChange)="onPetSizeChange($event)">
-      <mat-button-toggle class="button-toggle" [value]="'small'">
+      <mat-button-toggle class="button-toggle" [value]="'SMALL'">
         <div>{{ 'petForm.sizeSmall' | translate }}</div>
         <small>({{ 'petForm.sizeSmallHint' | translate }})</small>
       </mat-button-toggle>
-      <mat-button-toggle class="button-toggle" [value]="'medium'">
+      <mat-button-toggle class="button-toggle" [value]="'MEDIUM'">
         <div>{{ 'petForm.sizeMedium' | translate }}</div>
         <small>({{ 'petForm.sizeMediumHint' | translate }})</small>
       </mat-button-toggle>
-      <mat-button-toggle class="button-toggle" [value]="'large'">
+      <mat-button-toggle class="button-toggle" [value]="'LARGE'">
         <div>{{ 'petForm.sizeLarge' | translate }}</div>
         <small>({{ 'petForm.sizeLargeHint' | translate }})</small>
       </mat-button-toggle>
@@ -91,9 +97,9 @@
     <mat-checkbox formControlName="healthCommitment" class="commitment">
       {{ 'petForm.healthCommitment' | translate }}
     </mat-checkbox>
-    @if (form.get('healthCommitment').hasError('required')) {
-      <mat-error>Please consent this</mat-error>
-    }
+    <mat-error *ngIf="form.get('healthCommitment')?.hasError('required')">
+      Please consent this
+    </mat-error>
 
   </form>
 </mat-card>

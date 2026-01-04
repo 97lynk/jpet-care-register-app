@@ -1,91 +1,96 @@
-// appointment-details.component.ts
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import moment from "moment";
-
-type LocationType = 'fullday' | 'valor' | 'petshop';
+import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {AppointmentConfigService} from '../../../services/appointment-config.service';
+import {AppointmentLocation, AppointmentPrefecture, AppointmentTimeSlot} from 'src/app/models/appointment.model';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRadioModule} from '@angular/material/radio';
+import {CommonModule} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatCardModule} from '@angular/material/card';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-appointment-details',
   templateUrl: './appointment-details.component.html',
-  styleUrl: './appointment-details.component.scss',
-  standalone: false
+  styleUrls: ['./appointment-details.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    TranslateModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatInput,
+    // Add this module
+  ]
 })
 export class AppointmentDetailsComponent implements OnInit {
 
-  @Input() form!: any;
+  @Input() form!: AbstractControl | null;
   minDate = new Date();
 
-  locations = [
-    {
-      group: 'locations.veterinary_clinics', // translation key
-      items: [
-        {value: 'sakura_clinic', label: 'locations.sakura_clinic', type: 'fullday'},
-        {value: 'tokyo_pet', label: 'locations.tokyo_pet', type: 'fullday'}
-      ]
-    },
-    {
-      group: 'locations.supermarkets',
-      items: [
-        {value: 'valor_gifu', label: 'locations.valor_gifu', type: 'valor'},
-        {value: 'cainz_tokyo', label: 'locations.cainz_tokyo', type: 'valor'}
-      ]
-    },
-    {
-      group: 'locations.petshops',
-      items: [
-        {value: 'petplus_shibuya', label: 'locations.petplus_shibuya', type: 'petshop'}
-      ]
-    }
-  ];
+  prefectures: AppointmentPrefecture[] = [];
+  filteredLocations: AppointmentLocation[] = [];
+  currentTimeSlots: AppointmentTimeSlot[] = [];
 
-  timeSlotOptions: Record<LocationType, any> = {
-    fullday: {
-      slots: [
-        {value: 'fullday_10_15', label: 'timeslots.fullday_10_15'}
-      ]
-    },
-    valor: {
-      slots: [
-        {value: 'valor_morning', label: 'timeslots.valor_morning'},
-        {value: 'valor_afternoon', label: 'timeslots.valor_afternoon'}
-      ]
-    },
-    petshop: {
-      slots: [
-        {value: 'petshop_morning', label: 'timeslots.petshop_morning'},
-        {value: 'petshop_afternoon', label: 'timeslots.petshop_afternoon'}
-      ]
-    }
-  };
-
-  currentTimeSlots: any[] = [];
-  timeSlotInfo = '';
-
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private appointmentConfigService: AppointmentConfigService) { }
 
   ngOnInit(): void {
+    this.appointmentConfigService.getPrefectures().subscribe(data => {
+      this.prefectures = data;
+    });
   }
 
-  onLocationChange(locationValue: string) {
-    const location = this.locations
-      .flatMap(g => g.items)
-      .find(i => i.value === locationValue);
+  get appointmentForm(): FormGroup {
+    return this.form as FormGroup;
+  }
 
-    if (!location) return;
+  onPrefectureChange(prefectureCode: string): void {
+    this.form?.get('location')?.reset();
+    this.form?.get('timeSlot')?.reset();
+    this.filteredLocations = [];
+    this.currentTimeSlots = [];
 
-    const config = this.timeSlotOptions[location.type as LocationType];
-
-    this.currentTimeSlots = config.slots;
-    this.timeSlotInfo = config.info;
-
-    this.form.get('timeSlot')!.enable();
-    this.form.get('timeSlot')!.reset();
-
-
-    if (this.currentTimeSlots && this.currentTimeSlots.length > 0) {
-      this.form.get('timeSlot')?.setValue(this.currentTimeSlots[0].value);
+    if (prefectureCode) {
+      this.appointmentConfigService.getLocations(prefectureCode).subscribe(data => {
+        this.filteredLocations = data;
+      });
     }
+  }
+
+  onLocationChange(locationId: number): void {
+    this.form?.get('timeSlot')?.reset();
+    this.currentTimeSlots = [];
+
+    const selectedLocation = this.filteredLocations.find(loc => loc.id === locationId);
+    if (selectedLocation && selectedLocation.timeSlots) {
+      this.currentTimeSlots = Array.from(selectedLocation.timeSlots);
+      // Optionally, auto-select the first time slot
+      if (this.currentTimeSlots.length > 0) {
+        this.form?.get('timeSlot')?.setValue(this.currentTimeSlots[0].code);
+      }
+    }
+  }
+
+  get selectedPrefecture(): AppointmentPrefecture | undefined {
+    const code = this.appointmentForm.get('prefecture')?.value;
+    return this.prefectures.find(p => p.code === code);
+  }
+
+  get selectedLocation(): AppointmentLocation | undefined {
+    const id = this.appointmentForm.get('location')?.value;
+    return this.filteredLocations.find(l => l.id === id);
+  }
+
+  get selectedTimeSlot(): AppointmentTimeSlot | undefined {
+    const code = this.appointmentForm.get('timeSlot')?.value;
+    return this.currentTimeSlots.find(t => t.code === code);
   }
 }

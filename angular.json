@@ -20,6 +20,11 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/style"
+              ]
+            },
             "baseHref": "/jpet-care-register-app/",
             "outputPath": {
               "base": "dist/jpet-care-register-app"
@@ -67,7 +72,13 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
