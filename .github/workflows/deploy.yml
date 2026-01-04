@@ -14,7 +14,7 @@ jobs:
       uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
       with:
         github_access_token: ${{ secrets.GH_TOKEN }}
-        build_configuration: production
+        build_configuration: github
         base_href: /jpet-care-register-app/
         deploy_branch: gh-pages
         angular_dist_build_folder: dist/jpet-care-register-app/browser
