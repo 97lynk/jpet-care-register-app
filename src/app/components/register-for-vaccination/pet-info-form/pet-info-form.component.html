@@ -22,6 +22,13 @@
       <input matInput formControlName="petName">
     </mat-form-field>
 
+    <!-- PET TYPE -->
+    <label class="section">{{ 'petForm.petType' | translate }}</label>
+    <mat-radio-group formControlName="petType" class="radio-group">
+      <mat-radio-button value="DOG">{{ 'petForm.dog' | translate }}</mat-radio-button>
+      <mat-radio-button value="CAT">{{ 'petForm.cat' | translate }}</mat-radio-button>
+    </mat-radio-group>
+
     <!-- BREED -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>{{ 'petForm.petBreed' | translate }}</mat-label>

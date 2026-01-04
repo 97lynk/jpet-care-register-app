@@ -163,6 +163,7 @@ export class RegisterForVaccinationComponent implements OnInit {
     );
 
     return this.fb.group({
+      petType: ['DOG', Validators.required],
       petName: ['', Validators.required],
       petBreed: ['', Validators.required],
       birthDate: [moment().toDate(), Validators.required],
