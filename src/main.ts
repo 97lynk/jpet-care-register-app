@@ -8,6 +8,9 @@ if (environment.production) {
   enableProdMode();
 }
 
+// Log the environment configuration
+console.log('Application is running with environment:', environment);
+
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch(err => console.error(err));

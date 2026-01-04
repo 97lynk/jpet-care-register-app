@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "j-pet-care": {
+    "jpet-care-register-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -25,9 +25,9 @@
                 "src/app/style"
               ]
             },
-            "baseHref": "/j-pet-care/",
+            "baseHref": "/jpet-care-register-app/",
             "outputPath": {
-              "base": "dist/j-pet-care"
+              "base": "dist/jpet-care-register-app"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -72,7 +72,13 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -81,10 +87,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "j-pet-care:build:production"
+              "buildTarget": "jpet-care-register-app:build:production"
             },
             "development": {
-              "buildTarget": "j-pet-care:build:development"
+              "buildTarget": "jpet-care-register-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "j-pet-care:build"
+            "buildTarget": "jpet-care-register-app:build"
           }
         },
         "test": {

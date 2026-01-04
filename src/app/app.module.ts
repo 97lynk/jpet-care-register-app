@@ -2,7 +2,7 @@ import {NgModule, provideZoneChangeDetection} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {provideTranslateService, TranslateModule} from '@ngx-translate/core';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
@@ -12,6 +12,9 @@ import {QRCodeComponent} from 'angularx-qrcode';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './components/app.component';
+
+import {environment} from '../environments/environment';
+import {mockHttpInterceptor} from './services/mock-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import {AppComponent} from './components/app.component';
   ],
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(),
+    // Conditionally provide the mock interceptor using the modern `withInterceptors`
+    provideHttpClient(
+      withInterceptors(environment.useMock ? [mockHttpInterceptor] : [])
+    ),
     provideTranslateService({
       lang: 'ja',
       fallbackLang: 'ja',
